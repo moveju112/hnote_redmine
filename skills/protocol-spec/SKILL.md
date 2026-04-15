@@ -67,6 +67,14 @@ h3. Response
 - sess value: **always `"{{sessoin}}"` — never modify**
 - Use realistic values in examples (no dummy values like 0, 1, "string")
 
+## 작업 범위 제한 (필수)
+
+**1개 파일 초과 요청은 반드시 거부한다.**
+
+- 분석 대상이 2개 이상의 파일에 걸치는 경우 즉시 중단
+- "전체 프로토콜", "컨텐츠 전체", "모든 메서드" 등 광범위한 요청도 거부
+- 거부 시 안내 문구: "한 번에 1개 파일만 처리할 수 있습니다. 파일을 하나 지정해 주세요."
+
 ## Code Analysis Procedure
 
 ### Full Content Request
