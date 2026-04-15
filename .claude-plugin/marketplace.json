@@ -9,7 +9,10 @@
     {
       "name": "hnote_redmine",
       "description": "서버 코드 분석 후 Redmine textile 서식 프로토콜 명세서 작성",
-      "source": "."
+      "source": {
+        "source": "url",
+        "url": "https://github.com/moveju112/hnote_redmine.git"
+      }
     }
   ]
 }
