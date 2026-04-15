@@ -4,11 +4,28 @@ Redmine 프로젝트 관리를 위한 Claude Code 스킬 플러그인입니다.
 
 ## 설치
 
-Claude Code에서 아래 순서로 설치:
+### Claude Code
 
 1. `/plugin` 입력
 2. **Add Marketplace** 선택
 3. URL 입력: `https://github.com/moveju112/hnote_redmine`
+
+### Codex CLI
+
+1. **레포지토리 클론:**
+   ```bash
+   git clone https://github.com/moveju112/hnote_redmine.git ~/.codex/hnote_redmine
+   ```
+
+2. **스킬 심볼릭 링크 생성:**
+   ```bash
+   mkdir -p ~/.agents/skills
+   ln -s ~/.codex/hnote_redmine/skills ~/.agents/skills/hnote_redmine
+   ```
+
+3. **Codex 재시작**
+
+자세한 내용은 [`.codex/INSTALL.md`](.codex/INSTALL.md) 참고.
 
 ## 스킬 목록
 
