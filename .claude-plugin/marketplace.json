@@ -1,0 +1,15 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "hnote_redmine",
+  "description": "Redmine 프로토콜 명세서 작성을 위한 Claude Code 스킬 플러그인",
+  "owner": {
+    "name": "moveju112"
+  },
+  "plugins": [
+    {
+      "name": "hnote_redmine",
+      "description": "서버 코드 분석 후 Redmine textile 서식 프로토콜 명세서 작성",
+      "source": "."
+    }
+  ]
+}
