@@ -67,39 +67,39 @@ h3. Response
 - sess value: **always `"{{sessoin}}"` — never modify**
 - Use realistic values in examples (no dummy values like 0, 1, "string")
 
-## 작업 범위 제한 (필수)
+## Scope Limit (Required)
 
-**1개 파일 초과 요청은 반드시 거부한다.**
+**Reject any request spanning more than 1 file.**
 
-- 분석 대상이 2개 이상의 파일에 걸치는 경우 즉시 중단
-- "전체 프로토콜", "컨텐츠 전체", "모든 메서드" 등 광범위한 요청도 거부
-- 거부 시 안내 문구: "한 번에 1개 파일만 처리할 수 있습니다. 파일을 하나 지정해 주세요."
+- If the analysis target spans 2 or more files, stop immediately.
+- Also reject broad requests like "전체 프로토콜", "컨텐츠 전체", "모든 메서드".
+- Rejection message: "한 번에 1개 파일만 처리할 수 있습니다. 파일을 하나 지정해 주세요."
 
-## Method Number Lookup (필수)
+## Method Number Lookup (Required)
 
-**method 번호는 반드시 `wcnsvr/game/Enums/ActionMapper.php`에서 직접 읽어야 한다.**
+**Always read the method integer value directly from `wcnsvr/game/Enums/ActionMapper.php`.**
 
-- `ActionMapper.php`는 PHP `enum Action: int` 형태로 각 액션 이름과 정수 값을 정의한다.
-  예: `case EQUIP_LOCK = 7006;`
-- 핸들러 코드에서 `Action::EQUIP_LOCK` 같은 enum 참조를 발견하면, 반드시 `ActionMapper.php`를 열어 해당 case의 정수 값을 확인한 뒤 `* method : 7006` 형태로 기재한다.
-- `ActionMetaData.php`(`wcnsvr/game/Enums/ActionMetaData.php`)에는 `[Action::XXX, 'Method.string', '레이블', isLogged]` 형태로 각 액션의 메서드 문자열과 한국어 레이블이 기재되어 있다. h2. 기능명 작성 시 이 레이블을 참고한다.
-- 정수 값을 확인하지 않은 채 추정하거나 다른 파일에서 간접적으로 읽은 값을 사용하지 않는다.
+- `ActionMapper.php` defines `enum Action: int` mapping action names to integer values.
+  e.g. `case EQUIP_LOCK = 7006;`
+- When you encounter an enum reference like `Action::EQUIP_LOCK` in handler code, open `ActionMapper.php`, find the case, and use its integer value (e.g. `* method : 7006`).
+- `ActionMetaData.php` (`wcnsvr/game/Enums/ActionMetaData.php`) maps each Action to `[Action::XXX, 'Method.string', '레이블', isLogged]`. Use the Korean label for the h2. section title.
+- Never guess or infer method numbers; always verify from `ActionMapper.php`.
 
 ## Code Analysis Procedure
 
 ### Full Content Request
 
-1. `ActionMapper.php`에서 해당 컨텐츠의 메서드 번호 범위를 확인한다
-2. 각 메서드 핸들러를 순서대로 분석한다
-3. Request params: 파싱/유효성 검증 코드에서 추출
-4. Response fields: 응답 생성/직렬화 코드에서 추출
-5. 전체 컨텐츠를 하나의 문서로 작성 (h1. 하나, 기능별 h2. 하나씩)
+1. Identify the method number range for the content from `ActionMapper.php`
+2. Analyze each method handler in order
+3. Request params: extract from parsing/validation code
+4. Response fields: extract from response generation/serialization code
+5. Write entire content as one document (one `h1.`, one `h2.` per feature)
 
 ### Single Method Request
 
-1. 요청된 메서드 번호의 핸들러만 분석한다
-2. `ActionMapper.php`에서 해당 정수 값을 확인한다
-3. h2. 섹션만 작성 (문맥상 필요하지 않으면 h1./toc 생략)
+1. Analyze only the handler for the requested method number
+2. Confirm the integer value from `ActionMapper.php`
+3. Write one `h2.` section only (omit h1/toc unless context requires it)
 
 ### What to Extract from Code
 
