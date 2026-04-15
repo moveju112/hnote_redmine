@@ -16,9 +16,13 @@ The request scope may be an entire content section or a single method.
 - The saved file must contain **only** the Redmine body content that will actually be pasted into Redmine.
 - Do not include analysis notes, assumptions, file lists, validation logs, or surrounding explanation in the saved file.
 - Create the directory first if it does not exist.
+- The saved filename must include the timestamp in `YYYYMMDDHHMMSS` format.
 - Use a predictable filename based on the request scope:
-  - Single method: `method-XXXX.textile`
-  - Single source file or feature scope: short kebab-case title + `.textile`
+  - Single method: `method-XXXX-YYYYMMDDHHMMSS.textile`
+  - Single source file or feature scope: short kebab-case title + `-YYYYMMDDHHMMSS.textile`
+- Example filenames:
+  - `method-7006-20260415143025.textile`
+  - `equip-lock-20260415143025.textile`
 - When some fields are unconfirmed, keep only the Redmine markup in the file and express uncertainty inside the relevant Description cell as `(확인 필요)`.
 
 ## Redmine Textile Format Rules
