@@ -1,0 +1,19 @@
+{
+  "name": "redmine",
+  "displayName": "Redmine Skills",
+  "description": "Redmine 프로젝트 관리를 위한 Claude Code 스킬 모음",
+  "version": "1.0.0",
+  "author": {
+    "name": "Your Name",
+    "email": "your@email.com"
+  },
+  "homepage": "https://github.com/your-username/redmine-skills",
+  "repository": "https://github.com/your-username/redmine-skills",
+  "license": "MIT",
+  "keywords": [
+    "redmine",
+    "project-management",
+    "skills"
+  ],
+  "skills": "./skills/"
+}
