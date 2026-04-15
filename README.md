@@ -32,6 +32,7 @@ Redmine 프로젝트 관리를 위한 Claude Code 스킬 플러그인입니다.
 - Request / Response 파라미터 테이블 자동 구성
 - JSON 예시 자동 생성 (`{{random_id}}`, `{{sessoin}}` 포함)
 - 코드 주석 없는 필드도 이름/타입으로 한국어 Description 추론
+- 최종 Redmine 본문은 `docs/specification/` 아래에도 textile 파일로 저장
 - 모든 출력은 한국어
 
 **Redmine textile 출력 예시:**
@@ -86,6 +87,8 @@ hnote_redmine/
 │   │   └── SKILL.md         # 프로토콜 명세서 작성 스킬
 │   └── example-skill/
 │       └── SKILL.md         # 새 스킬 작성용 템플릿
+├── docs/
+│   └── specification/       # Redmine에 붙여넣을 최종 textile 본문 저장 위치
 ├── package.json
 └── README.md
 ```
