@@ -4,11 +4,11 @@ Redmine 프로젝트 관리를 위한 Claude Code 스킬 플러그인입니다.
 
 ## 설치
 
-Claude Code에서 GitHub URL로 직접 설치:
+Claude Code에서 아래 순서로 설치:
 
-```
-/plugin install https://github.com/moveju112/hnote_redmine
-```
+1. `/plugin` 입력
+2. **Add Marketplace** 선택
+3. URL 입력: `https://github.com/moveju112/hnote_redmine`
 
 ## 스킬 목록
 
