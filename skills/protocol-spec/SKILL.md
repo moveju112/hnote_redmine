@@ -72,7 +72,36 @@ h3. Response
 - Top-level key: `| keyname | | type | description |` (Subkey cell empty)
 - Subkey: `| | subkeyname | type | description |` (Key cell empty)
 - Group key (array/object): leave Type cell empty, write description only
-- Always maintain 4 columns
+- Always maintain exactly 4 columns — never add extra columns
+
+#### Deeply Nested Fields (3+ levels)
+
+When a field is 3 or more levels deep, **do not add extra table columns**. Instead, express the full path using dot notation in the Subkey cell:
+
+- `parent.child` — object field
+- `parent[].child` — field inside an array element
+- `parent[].child.grandchild` — deeper nesting
+
+Example for `rankingInfo > ranking[] > rank`:
+
+```textile
+|_.Key |_.Subkey |_.Type |_.Description |
+| rankingInfo | | | 랭킹 보드 정보 |
+| | type | int | 랭킹 타입 |
+| | ranking | | 순위 목록 (최대 50위) |
+| | ranking[].rank | int | 순위 |
+| | ranking[].score | int | 점수 |
+| | ranking[].uno | int | 유저 번호 |
+| rankrwd | | | 최초 달성 보상 정보 |
+| | rwd | | 달성 보상 목록 |
+| | rwd[].need | int | 달성 목표값 |
+| | rwd[].achvr | | 최초 달성자 정보 (미달성 시 null) |
+| | rwd[].achvr.uno | int | 달성자 유저 번호 |
+| | rwd[].achvr.name | string | 달성자 닉네임 |
+| | rwd[].done | bool | 보상 수령 가능 여부 |
+```
+
+Rule: the Subkey cell always holds a single path expression — never leave it empty while pushing content into Type or Description.
 
 ### JSON Example Rules
 
