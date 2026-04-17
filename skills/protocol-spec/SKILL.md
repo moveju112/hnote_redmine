@@ -10,20 +10,23 @@ description: Use when asked to write, generate, or update Redmine protocol speci
 Analyze server code and write client-facing protocol specification documents in Redmine textile format.
 The request scope may be an entire content section or a single method.
 
-## Output File Rule
+## Output File Rule (Required — no exceptions)
 
-- Also save the final Redmine textile output to `docs/specification/`.
-- The saved file must contain **only** the Redmine body content that will actually be pasted into Redmine.
-- Do not include analysis notes, assumptions, file lists, validation logs, or surrounding explanation in the saved file.
-- Create the directory first if it does not exist.
-- The saved filename must include the timestamp in `YYYYMMDDHHMMSS` format.
-- Use a predictable filename based on the request scope:
+**Always save the output file. Wrong path or missing timestamp = rule violation.**
+
+- Directory: **`docs/specification/`** — never any other path (e.g. `docs/` alone is wrong)
+- Create the directory first if it does not exist
+- Filename format: **`<scope>-YYYYMMDDHHMMSS.textile`** — timestamp is mandatory, never omit it
   - Single method: `method-XXXX-YYYYMMDDHHMMSS.textile`
-  - Single source file or feature scope: short kebab-case title + `-YYYYMMDDHHMMSS.textile`
-- Example filenames:
-  - `method-7006-20260415143025.textile`
-  - `equip-lock-20260415143025.textile`
-- When some fields are unconfirmed, keep only the Redmine markup in the file and express uncertainty inside the relevant Description cell as `(확인 필요)`.
+  - Feature/file scope: short kebab-case title + `-YYYYMMDDHHMMSS.textile`
+- Correct examples:
+  - `docs/specification/method-7006-20260415143025.textile`
+  - `docs/specification/ranking-20260415143025.textile`
+- Wrong examples (never do these):
+  - `docs/ranking-protocol.textile` ← wrong directory, missing timestamp
+  - `docs/specification/ranking-protocol.textile` ← missing timestamp
+- File content: **only** the Redmine textile body — no analysis notes, no explanations
+- Unconfirmed fields: write `(확인 필요)` inside the relevant Description cell
 
 ## Redmine Textile Format Rules
 
@@ -184,11 +187,13 @@ Rules:
 - [ ] Every method has `* method : XXXX`
 - [ ] Request table: 4 columns, subkey rows have Key cell empty
 - [ ] Response table: 4 columns, subkey rows have Key cell empty
+- [ ] Nested fields use dot notation in Subkey cell — no sub-tables
 - [ ] JSON examples use `{{random_id}}` and `{{sessoin}}`
 - [ ] JSON example values are realistic, not dummy
 - [ ] Simple success response uses `"result": true`
 - [ ] Full content request includes `h1.` and `{{>toc}}`
 - [ ] Group keys have Type cell empty
+- [ ] File saved to `docs/specification/<scope>-YYYYMMDDHHMMSS.textile` — path and timestamp both correct
 
 ## Example — Shop Purchase Method
 
