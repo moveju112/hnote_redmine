@@ -76,32 +76,44 @@ h3. Response
 
 #### Deeply Nested Fields (3+ levels)
 
-When a field is 3 or more levels deep, **do not add extra table columns**. Instead, express the full path using dot notation in the Subkey cell:
+When a field is 3 or more levels deep, **do not add extra table columns and do not split into sub-tables**. Express the full path using dot notation in the Subkey cell, keeping everything in one continuous table:
 
 - `parent.child` — object field
 - `parent[].child` — field inside an array element
 - `parent[].child.grandchild` — deeper nesting
 
-Example for `rankingInfo > ranking[] > rank`:
+When fields differ by type (e.g. Type 2·3·4 vs 5·6), list all fields in the same table and note the condition in the Description cell.
+
+Example — `rankingInfo > ranking[]` (type-conditional) and `rankrwd > rwd[] > achvr`:
 
 ```textile
 |_.Key |_.Subkey |_.Type |_.Description |
 | rankingInfo | | | 랭킹 보드 정보 |
 | | type | int | 랭킹 타입 |
-| | ranking | | 순위 목록 (최대 50위) |
+| | ranking | | 랭킹 목록 (상위 50위) |
 | | ranking[].rank | int | 순위 |
 | | ranking[].score | int | 점수 |
-| | ranking[].uno | int | 유저 번호 |
-| rankrwd | | | 최초 달성 보상 정보 |
-| | rwd | | 달성 보상 목록 |
-| | rwd[].need | int | 달성 목표값 |
+| | ranking[].uno | int | 유저 번호 (Type 2·3·4 전용) |
+| | ranking[].name | string | 닉네임 (Type 2·3·4 전용) |
+| | ranking[].prfl | int | 프로필 이미지 인덱스 (Type 2·3·4 전용) |
+| | ranking[].pidx | int | 투표 대상 인덱스 (Type 5·6 전용) |
+| rankrwd | | | 마일스톤 보상 정보 (Type 2·3·4 전용) |
+| | rwd | | 마일스톤 보상 목록 |
+| | rwd[].need | int | 달성 필요 점수 |
 | | rwd[].achvr | | 최초 달성자 정보 (미달성 시 null) |
-| | rwd[].achvr.uno | int | 달성자 유저 번호 |
-| | rwd[].achvr.name | string | 달성자 닉네임 |
+| | rwd[].achvr.uno | int | 유저 번호 |
+| | rwd[].achvr.name | string | 닉네임 |
+| | rwd[].achvr.prfl | int | 프로필 이미지 인덱스 |
+| | rwd[].achvr.date | int | 달성 시각 Unix timestamp |
+| | rwd[].optime | int | 보상 오픈 시각 Unix timestamp (미달성 시 0) |
 | | rwd[].done | bool | 보상 수령 가능 여부 |
+| | rwd[].reward | bool | 수령 완료 여부 |
 ```
 
-Rule: the Subkey cell always holds a single path expression — never leave it empty while pushing content into Type or Description.
+Rules:
+- Never split nested structures into separate sub-tables
+- The Subkey cell always holds a single dot-notation path expression
+- Type-conditional fields stay in the same table; note the condition in Description
 
 ### JSON Example Rules
 
